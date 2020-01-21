@@ -1,12 +1,18 @@
 import { Router } from 'express';
+import multer from 'multer';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import AttractionController from './app/controllers/AttractionController';
+import FileController from './app/controllers/FileController';
 
 import authMiddleware from './app/middlewares/auth';
 
+import multerConfig from './config/multer';
+
 const routes = new Router();
+
+const upload = multer(multerConfig);
 
 routes.get('/', (req, res) => res.json({ message: 'Hello World' }));
 
@@ -19,5 +25,7 @@ routes.delete('/attractions/:id', authMiddleware, AttractionController.delete);
 
 routes.post('/users', UserController.store);
 routes.put('/users', authMiddleware, UserController.update);
+
+routes.post('/files', upload.single('file'), authMiddleware, FileController.store);
 
 export default routes;

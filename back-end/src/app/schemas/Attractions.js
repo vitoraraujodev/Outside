@@ -5,7 +5,7 @@ const AttractionSchema = new mongoose.Schema({
   title: String,
   description: String,
   history: String,
-  picture_url: String,
+  picture_id: Number,
   location: {
     type: PointSchema,
     index: '2dsphere',
