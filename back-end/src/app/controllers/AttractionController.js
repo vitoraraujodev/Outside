@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import User from '../models/User';
 import Attraction from '../schemas/Attractions';
+import Admin from '../models/Admin';
 
 class AttractionController {
   async index(req, res) {
@@ -22,9 +22,9 @@ class AttractionController {
       return res.status(400).json({ error: 'Validation failed.' });
     }
 
-    const user = await User.findByPk(req.userId);
+    const admin = await Admin.findOne({ where: { user_id: req.userId } });
 
-    if (!user.admin) {
+    if (!admin) {
       return res.status(401).json({ error: 'Only administrators can save an attraction point.' });
     }
 
@@ -57,9 +57,9 @@ class AttractionController {
       return res.status(400).json({ error: 'Validation failed' });
     }
 
-    const user = await User.findByPk(req.userId);
+    const admin = await Admin.findOne({ where: { user_id: req.userId } });
 
-    if (!user.admin) {
+    if (!admin) {
       return res.status(401).json({ error: 'Only administrators can save an attraction point.' });
     }
 
@@ -82,6 +82,12 @@ class AttractionController {
   }
 
   async delete(req, res) {
+    const admin = await Admin.findOne({ where: { user_id: req.userId } });
+
+    if (!admin) {
+      return res.status(401).json({ error: 'Only administrators can save an attraction point.' });
+    }
+
     await Attraction.findByIdAndDelete(req.params.id);
 
     return res.json({ okay: true });
