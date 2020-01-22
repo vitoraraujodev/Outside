@@ -14,6 +14,7 @@ class AttractionController {
       title: Yup.string().required(),
       description: Yup.string(),
       history: Yup.string(),
+      kind: Yup.string().required(),
       longitude: Yup.number().required(),
       latitude: Yup.number().required(),
     });
@@ -29,7 +30,7 @@ class AttractionController {
     }
 
     const {
-      title, description, history, latitude, longitude,
+      title, description, history, kind, latitude, longitude,
     } = req.body;
 
     const location = {
@@ -38,7 +39,7 @@ class AttractionController {
     };
 
     const attraction = await Attraction.create({
-      title, description, history, location,
+      title, description, history, kind, location,
     });
 
     return res.json(attraction);
@@ -49,6 +50,7 @@ class AttractionController {
       title: Yup.string(),
       description: Yup.string(),
       history: Yup.string(),
+      kind: Yup.string(),
       longitude: Yup.number(),
       latitude: Yup.number(),
     });
@@ -64,7 +66,7 @@ class AttractionController {
     }
 
     const {
-      title, description, history, latitude, longitude,
+      title, description, history, kind, latitude, longitude,
     } = req.body;
 
     const location = {
@@ -73,7 +75,7 @@ class AttractionController {
     };
 
     const attraction = await Attraction.findByIdAndUpdate(req.params.id, {
-      title, description, history, location,
+      title, description, history, kind, location,
     }, { new: true });
 
     return res.json(
