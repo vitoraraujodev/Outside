@@ -4,10 +4,49 @@ import Admin from '../models/Admin';
 
 class AttractionController {
   async index(req, res) {
-    const attractions = await Attraction.find();
+    const {
+      topLatitude, bottomLatitude, leftLongitude, rightLongitude,
+    } = req.query;
+
+    console.log(topLatitude, bottomLatitude, leftLongitude, rightLongitude);
+
+    const attractions = await Attraction.find({
+      location: {
+        $geoWithin: {
+          $geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
+                [parseFloat(leftLongitude), parseFloat(topLatitude)],
+                [parseFloat(rightLongitude), parseFloat(topLatitude)],
+                [parseFloat(rightLongitude), parseFloat(bottomLatitude)],
+                [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
+              ],
+            ],
+          },
+        },
+      },
+    });
+
 
     return res.json(attractions);
   }
+
+  /*
+    $geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [ -43.199232, -22.98998],
+                [ -43.1980279, -22.987557],
+                [-43.1931915, -22.987194],
+                [-43.193481, -22.990197],
+                [-43.199232, -22.98998],
+              ],
+            ],
+          },
+  */
 
   async store(req, res) {
     const schema = Yup.object().shape({
