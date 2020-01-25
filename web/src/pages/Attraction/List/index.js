@@ -3,5 +3,5 @@ import React from 'react';
 // import { Container } from './styles';
 
 export default function List() {
-  return <div />;
+  return <h1>List Page</h1>;
 }

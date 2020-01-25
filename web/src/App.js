@@ -5,6 +5,8 @@ import history from './services/history';
 
 import Routes from './routes';
 
+import './config/ReactotronConfig';
+
 function App() {
   return (
     <Router history={history}>
