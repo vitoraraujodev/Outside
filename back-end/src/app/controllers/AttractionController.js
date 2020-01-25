@@ -8,8 +8,6 @@ class AttractionController {
       topLatitude, bottomLatitude, leftLongitude, rightLongitude,
     } = req.query;
 
-    console.log(topLatitude, bottomLatitude, leftLongitude, rightLongitude);
-
     const attractions = await Attraction.find({
       location: {
         $geoWithin: {

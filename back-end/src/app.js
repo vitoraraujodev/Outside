@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import routes from './routes';
 
@@ -14,6 +15,7 @@ class App {
       useUnifiedTopology: true,
     });
 
+    this.server.use(cors());
     this.middlewares();
     this.routes();
   }
