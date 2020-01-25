@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import Route from './Route';
 
 import Home from '~/pages/Home';
 
@@ -14,9 +15,13 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/signin" component={SignIn} />
-      <Route path="/attractions" exact component={AttractionList} />
-      <Route path="/attractions/new" component={AttractionStore} />
-      <Route path="/attractions/edit/:id" component={AttractionEdit} />
+      <Route path="/attractions" exact component={AttractionList} isPrivate />
+      <Route path="/attractions/new" component={AttractionStore} isPrivate />
+      <Route
+        path="/attractions/edit/:id"
+        component={AttractionEdit}
+        isPrivate
+      />
     </Switch>
   );
 }
