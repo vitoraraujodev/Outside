@@ -31,6 +31,7 @@ module.exports = {
       'warn',
       {extensions: ['.jsx', '.js']}
     ],
+    "camelCase": "off",
     'import/prefer-default-export': 'off'
   },
   settings: {
