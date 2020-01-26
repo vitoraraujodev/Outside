@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import DefaultLayout from '~/pages/_layout/default';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
@@ -15,6 +17,19 @@ export default function RouteWrapper({
 
   if (signed && !isPrivate) {
     return <Redirect to="/attractions" />;
+  }
+
+  if (signed) {
+    return (
+      <Route
+        {...rest}
+        render={props => (
+          <DefaultLayout>
+            <Component {...props} />
+          </DefaultLayout>
+        )}
+      />
+    );
   }
 
   return <Route {...rest} component={Component} />;
