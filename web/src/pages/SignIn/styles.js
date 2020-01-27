@@ -4,7 +4,7 @@ import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
-  background: #bb2222;
+  background: #bb3333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@ export const Content = styled.div`
     justify-content: center;
     margin-top: 30px;
     strong {
-      color: #bb2222;
+      color: #bb3333;
       font-size: 28px;
       font-weight: bold;
       text-align: center;
@@ -58,7 +58,7 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #bb2222;
+      background: #bb3333;
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -67,7 +67,7 @@ export const Content = styled.div`
       margin-bottom: 20px;
       transition: background 0.2s;
       &:hover {
-        background: ${darken(0.03, '#bb2222')};
+        background: ${darken(0.03, '#bb3333')};
       }
     }
   }
