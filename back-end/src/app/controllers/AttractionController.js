@@ -8,26 +8,29 @@ class AttractionController {
       topLatitude, bottomLatitude, leftLongitude, rightLongitude,
     } = req.query;
 
-    const attractions = await Attraction.find({
-      location: {
-        $geoWithin: {
-          $geometry: {
-            type: 'Polygon',
-            coordinates: [
-              [
-                [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
-                [parseFloat(leftLongitude), parseFloat(topLatitude)],
-                [parseFloat(rightLongitude), parseFloat(topLatitude)],
-                [parseFloat(rightLongitude), parseFloat(bottomLatitude)],
-                [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
+    if (topLatitude && bottomLatitude && leftLongitude && rightLongitude) {
+      const attractions = await Attraction.find({
+        location: {
+          $geoWithin: {
+            $geometry: {
+              type: 'Polygon',
+              coordinates: [
+                [
+                  [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
+                  [parseFloat(leftLongitude), parseFloat(topLatitude)],
+                  [parseFloat(rightLongitude), parseFloat(topLatitude)],
+                  [parseFloat(rightLongitude), parseFloat(bottomLatitude)],
+                  [parseFloat(leftLongitude), parseFloat(bottomLatitude)],
+                ],
               ],
-            ],
+            },
           },
         },
-      },
-    });
+      });
+      return res.json(attractions);
+    }
 
-
+    const attractions = await Attraction.find().sort({ title: 1 });
     return res.json(attractions);
   }
 
