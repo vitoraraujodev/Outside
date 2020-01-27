@@ -26,6 +26,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    'no-console': 'off',
     "react/jsx-props-no-spreading":"off",
     "react/jsx-one-expression-per-line": "off",
     'react/state-in-constructor': ['error', 'never'],
