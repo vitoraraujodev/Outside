@@ -3,7 +3,8 @@ import React from 'react';
 import './config/ReactotronConfig';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import store from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
 
 import history from './services/history';
 import Routes from './routes';
@@ -13,10 +14,12 @@ import GlobalStyle from './styles/global';
 function App() {
   return (
     <Provider store={store}>
-      <Router history={history}>
-        <Routes />
-        <GlobalStyle />
-      </Router>
+      <PersistGate persistor={persistor}>
+        <Router history={history}>
+          <Routes />
+          <GlobalStyle />
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }
