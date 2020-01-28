@@ -20,7 +20,6 @@ export const Content = styled.div`
       font-size: 16px;
       font-weight: bold;
       margin-right: 24px;
-      color: #f5f5cc;
     }
   }
 
@@ -36,7 +35,7 @@ export const Content = styled.div`
     span {
       margin-top: 2px;
       font-size: 12px;
-      color: #f5f5cc;
+      color: #f2d984;
       cursor: pointer;
     }
   }
