@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Form } from '@rocketseat/unform';
+import { Form, Select } from '@rocketseat/unform';
 
 import { darken } from 'polished';
 
@@ -93,7 +93,7 @@ export const CadastrationForm = styled(Form)`
   }
 `;
 
-export const TypeSelect = styled.select`
+export const TypeSelect = styled(Select)`
   height: 45px;
   background: #fff;
   border: 1px solid #ccc;

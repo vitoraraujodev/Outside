@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Input } from '@rocketseat/unform';
 
@@ -6,30 +6,45 @@ import { Container, CadastrationForm, TypeSelect } from './styles';
 
 import history from '~/services/history';
 
-export default function Store() {
-  const [type, setType] = useState('n');
+import api from '~/services/api';
 
+export default function Store() {
   function handleBack(route) {
     history.push(route);
   }
 
-  function handleSelect(event) {
-    console.tron.log(event.target.value);
-    setType(event.target.value);
+  async function handleSubmit(data) {
+    await api.post('/attractions', data);
+    history.push('/attractions');
   }
+
+  const selectOptions = [
+    {
+      id: 'n',
+      title: 'Natureza',
+    },
+    {
+      id: 'h',
+      title: 'Histórico',
+    },
+    {
+      id: 'b',
+      title: 'Ambos',
+    },
+  ];
 
   return (
     <Container>
-      <div>
-        <strong>Cadastro de atração</strong>
-        <aside>
-          <button type="button" onClick={() => handleBack('/attractions')}>
-            VOLTAR
-          </button>
-          <button type="button">SALVAR</button>
-        </aside>
-      </div>
-      <CadastrationForm>
+      <CadastrationForm onSubmit={handleSubmit}>
+        <div>
+          <strong>Cadastro de atração</strong>
+          <aside>
+            <button type="button" onClick={() => handleBack('/attractions')}>
+              VOLTAR
+            </button>
+            <button type="submit">SALVAR</button>
+          </aside>
+        </div>
         <strong>TÍTULO</strong>
         <Input name="title" placeholder="Nome do lugar" />
 
@@ -50,11 +65,11 @@ export default function Store() {
           </article>
           <article>
             <strong>TIPO</strong>
-            <TypeSelect value={type} onChange={handleSelect}>
-              <option value="n">Natureza</option>
-              <option value="h">Historico</option>
-              <option value="b">Ambos</option>
-            </TypeSelect>
+            <TypeSelect
+              name="kind"
+              placeholder="Selecione..."
+              options={selectOptions}
+            />
           </article>
         </section>
       </CadastrationForm>
