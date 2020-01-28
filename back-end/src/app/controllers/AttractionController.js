@@ -75,7 +75,7 @@ class AttractionController {
 
     const location = {
       type: 'Point',
-      coordinates: [longitude, latitude],
+      coordinates: [parseFloat(longitude), parseFloat(latitude)],
     };
 
     const attraction = await Attraction.create({
@@ -111,7 +111,7 @@ class AttractionController {
 
     const location = {
       type: 'Point',
-      coordinates: [longitude, latitude],
+      coordinates: [parseFloat(longitude), parseFloat(latitude)],
     };
 
     const attraction = await Attraction.findByIdAndUpdate(req.params.id, {
