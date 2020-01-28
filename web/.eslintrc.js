@@ -28,6 +28,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-console': 'off',
     'no-param-reassign': 'off',
+    'no-underscore-dangle': 'off',
     "react/jsx-props-no-spreading":"off",
     "react/jsx-one-expression-per-line": "off",
     'react/state-in-constructor': ['error', 'never'],

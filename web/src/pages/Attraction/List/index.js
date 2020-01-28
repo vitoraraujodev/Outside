@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { MdCheck, MdClear } from 'react-icons/md';
 import { Container, Table, EditLink, DeleteLink } from './styles';
 
 import history from '~/services/history';
+import api from '~/services/api';
 
 export default function List() {
+  const [attractions, setAttractions] = useState([]);
+
   function handleCadastration(route) {
     history.push(route);
   }
 
-  const attraction = {
-    _id: '1',
-    title: 'Pedra do Arpoador',
-    description: 'falae blz',
-    history: 'falae blz',
-    latitude: -23,
-    longitude: -43,
-    kind: 'h',
-  };
+  async function handleDelete(id) {
+    await api.delete(`/attractions/${id}`);
+  }
+
+  useEffect(() => {
+    async function loadAttractions() {
+      const response = await api.get('/attractions');
+      const formattedAttractions = response.data.map(attraction => {
+        return {
+          ...attraction,
+          latitude: attraction.location.coordinates[1],
+          longitude: attraction.location.coordinates[0],
+        };
+      });
+      setAttractions(formattedAttractions);
+    }
+    loadAttractions();
+  }, [attractions]);
 
   return (
     <Container>
@@ -50,52 +62,43 @@ export default function List() {
             <th width="18%" align="center">
               HISTÓRIA
             </th>
-            <th width="5%" />
+            <th width="5%" /> {/*eslint-disable-line */}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Pedra do Arpoador</td>
-            <td>Natureza</td>
-            <td align="center">
-              <MdCheck size={24} />
-            </td>
-            <td align="center">
-              <MdClear size={24} />
-            </td>
-            <td>
-              <EditLink
-                to={{
-                  pathname: `/attractions/edit/${attraction._id}`,
-                  state: { attraction },
-                }}
-              >
-                editar
-              </EditLink>
-              <DeleteLink>apagar</DeleteLink>
-            </td>
-          </tr>
-          <tr>
-            <td>Museu Nacional</td>
-            <td>Histórico</td>
-            <td align="center">
-              <MdCheck size={24} />
-            </td>
-            <td align="center">
-              <MdCheck size={24} />
-            </td>
-            <td>
-              <EditLink
-                to={{
-                  pathname: `/attractions/edit/${attraction._id}`,
-                  state: { attraction },
-                }}
-              >
-                editar
-              </EditLink>
-              <DeleteLink>apagar</DeleteLink>
-            </td>
-          </tr>
+          {attractions.map(attraction => (
+            <tr>
+              <td>{attraction.title}</td>
+              <td>Natureza</td>
+              <td align="center">
+                {attraction.description ? (
+                  <MdCheck size={24} />
+                ) : (
+                  <MdClear size={24} />
+                )}
+              </td>
+              <td align="center">
+                {attraction.history ? (
+                  <MdCheck size={24} />
+                ) : (
+                  <MdClear size={24} />
+                )}
+              </td>
+              <td>
+                <EditLink
+                  to={{
+                    pathname: `/attractions/edit/${attraction._id}`,
+                    state: { attraction },
+                  }}
+                >
+                  editar
+                </EditLink>
+                <DeleteLink onClick={() => handleDelete(attraction._id)}>
+                  apagar
+                </DeleteLink>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
