@@ -10,6 +10,16 @@ export default function List() {
     history.push(route);
   }
 
+  const attraction = {
+    _id: '1',
+    title: 'Pedra do Arpoador',
+    description: 'falae blz',
+    history: 'falae blz',
+    latitude: -23,
+    longitude: -43,
+    kind: 'h',
+  };
+
   return (
     <Container>
       <div>
@@ -54,7 +64,14 @@ export default function List() {
               <MdClear size={24} />
             </td>
             <td>
-              <EditLink>editar</EditLink>
+              <EditLink
+                to={{
+                  pathname: `/attractions/edit/${attraction._id}`,
+                  state: { attraction },
+                }}
+              >
+                editar
+              </EditLink>
               <DeleteLink>apagar</DeleteLink>
             </td>
           </tr>
@@ -68,7 +85,14 @@ export default function List() {
               <MdCheck size={24} />
             </td>
             <td>
-              <EditLink>editar</EditLink>
+              <EditLink
+                to={{
+                  pathname: `/attractions/edit/${attraction._id}`,
+                  state: { attraction },
+                }}
+              >
+                editar
+              </EditLink>
               <DeleteLink>apagar</DeleteLink>
             </td>
           </tr>
