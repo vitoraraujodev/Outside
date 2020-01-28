@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Input } from '@rocketseat/unform';
 
-import { Container, CadastrationForm } from './styles';
+import { Container, CadastrationForm, TypeSelect } from './styles';
 
 import history from '~/services/history';
 
 export default function Store() {
+  const [type, setType] = useState('n');
+
   function handleBack(route) {
     history.push(route);
+  }
+
+  function handleSelect(event) {
+    console.tron.log(event.target.value);
+    setType(event.target.value);
   }
 
   return (
@@ -43,7 +50,11 @@ export default function Store() {
           </article>
           <article>
             <strong>TIPO</strong>
-            <Input name="kind" placeholder="Tipo de atração" />
+            <TypeSelect value={type} onChange={handleSelect}>
+              <option value="n">Natureza</option>
+              <option value="h">Historico</option>
+              <option value="b">Ambos</option>
+            </TypeSelect>
           </article>
         </section>
       </CadastrationForm>

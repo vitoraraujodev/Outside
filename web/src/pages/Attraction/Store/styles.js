@@ -5,6 +5,11 @@ import { Form } from '@rocketseat/unform';
 import { darken } from 'polished';
 
 export const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   div {
     display: flex;
     justify-content: space-between;
@@ -76,9 +81,25 @@ export const CadastrationForm = styled(Form)`
     article {
       display: flex;
       flex-direction: column;
+      margin-right: 16px;
       input {
-        width: auto;
+        width: 100%;
+      }
+      &:last-child {
+        margin-right: 0;
+        margin-left: auto;
       }
     }
   }
+`;
+
+export const TypeSelect = styled.select`
+  height: 45px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 19px;
+  color: #666;
+  padding: 0 15px;
+  width: 280px;
 `;
