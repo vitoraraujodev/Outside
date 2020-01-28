@@ -7,7 +7,6 @@ import Home from '~/pages/Home';
 import SignIn from '~/pages/SignIn';
 
 import AttractionList from '~/pages/Attraction/List';
-import AttractionShow from '~/pages/Attraction/Show';
 import AttractionStore from '~/pages/Attraction/Store';
 import AttractionEdit from '~/pages/Attraction/Edit';
 
@@ -17,7 +16,6 @@ export default function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/signin" component={SignIn} />
       <Route path="/attractions" exact component={AttractionList} isPrivate />
-      <Route path="/attractions/:id" component={AttractionShow} isPrivate />
       <Route path="/attractions/new" component={AttractionStore} isPrivate />
       <Route
         path="/attractions/edit/:id"

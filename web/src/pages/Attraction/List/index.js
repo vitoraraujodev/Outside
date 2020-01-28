@@ -3,13 +3,24 @@ import React from 'react';
 import { MdCheck, MdClear } from 'react-icons/md';
 import { Container, Table, EditLink, DeleteLink } from './styles';
 
+import history from '~/services/history';
+
 export default function List() {
+  function handleCadastration(route) {
+    history.push(route);
+  }
+
   return (
     <Container>
       <div>
         <strong>Gerenciando atrações</strong>
         <aside>
-          <button type="button">CADASTRAR</button>
+          <button
+            type="button"
+            onClick={() => handleCadastration('/attractions/new')}
+          >
+            CADASTRAR
+          </button>
           <input placeholder="Buscar atração" />
         </aside>
       </div>
