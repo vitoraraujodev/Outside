@@ -5,7 +5,6 @@ import { Input } from '@rocketseat/unform';
 import { Container, CadastrationForm, TypeSelect } from './styles';
 
 import history from '~/services/history';
-
 import api from '~/services/api';
 
 export default function Store() {
