@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StatusBar } from 'react-native';
+
+import Routes from './src/routes';
 
 import './src/config/ReactotronConfig';
+import 'react-native-gesture-handler';
 
 export default function App() {
-  console.tron.log('hey');
   return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#bb3333" />
+      <Routes />
+    </>
   );
 }
