@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import googleLogo from '~/assets/googleLogo.png';
 import facebookLogo from '~/assets/facebookLogo.png';
@@ -18,7 +19,20 @@ import {
 
 import Background from '~/components/Background';
 
+import { signInRequest } from '~/store/modules/auth/actions';
+
 export default function SignIn({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loading = useSelector(state => state.auth.loading);
+
+  const dispatch = useDispatch();
+
+  function handleSubmit() {
+    dispatch(signInRequest(email, password));
+  }
+
   return (
     <Background>
       <Container>
@@ -30,13 +44,19 @@ export default function SignIn({ navigation }) {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Digite seu email"
+            value={email}
+            onChangeText={setEmail}
           />
           <FormInput
             icon="lock-outline"
             secureTextEntry
             placeholder="Digite sua senha"
+            value={password}
+            onChangeText={setPassword}
           />
-          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Acessar
+          </SubmitButton>
         </Form>
         <SignLink
           onPress={() => {
