@@ -23,6 +23,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.vitoraraujo.outside"
+    },
     "ios": {
       "supportsTablet": true
     }

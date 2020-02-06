@@ -1,15 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 
-import './src/config/ReactotronConfig';
+import '~/config/ReactotronConfig';
 import 'react-native-gesture-handler';
 
-import { store, persistor } from './src/store';
+import { store, persistor } from '~/store';
 
-import Routes from './src/routes';
+import Routes from '~/routes/createRouter';
 
 export default function App() {
   return (
