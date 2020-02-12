@@ -5,8 +5,10 @@ import {
   getCurrentPositionAsync,
 } from 'expo-location';
 import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MenuButton from '~/components/MenuButton';
+import Footer from '~/components/Footer';
 
 export default function Map({ navigation }) {
   const [currentRegion, setCurrentRegion] = useState(null);
@@ -51,6 +53,7 @@ export default function Map({ navigation }) {
         customMapStyle={googleMapStyle}
       >
         <Marker coordinate={{ latitude: -22.9906595, longitude: -43.1953568 }}>
+          <Icon name="location-on" size={50} color="#bb3333" />
           <Callout
             onPress={() => {
               // navegação
@@ -65,6 +68,7 @@ export default function Map({ navigation }) {
         </Marker>
       </MapView>
       <MenuButton navigation={navigation} />
+      <Footer />
     </>
   );
 }

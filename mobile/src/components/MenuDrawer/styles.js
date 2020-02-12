@@ -48,7 +48,7 @@ export const LinkText = styled.Text`
   color: #666;
 `;
 
-export const LegalInfo = styled.View`
+export const AboutInfo = styled.View`
   flex-direction: row;
   align-self: center;
   justify-content: center;
@@ -58,8 +58,15 @@ export const LegalInfo = styled.View`
   border-top-width: 1px;
 `;
 
-export const LegalText = styled.Text`
+export const AboutTouchable = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const AboutText = styled.Text`
   font-size: 12px;
   font-weight: bold;
+  margin-left: 6px;
   color: #666;
 `;

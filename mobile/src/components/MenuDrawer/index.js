@@ -1,5 +1,4 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -11,8 +10,9 @@ import {
   NavLink,
   NavLinkTouchable,
   LinkText,
-  LegalInfo,
-  LegalText,
+  AboutInfo,
+  AboutTouchable,
+  AboutText,
 } from './styles';
 
 export default function MenuDrawer() {
@@ -24,6 +24,12 @@ export default function MenuDrawer() {
       </Profile>
       <Scroller>
         <Links>
+          <NavLink>
+            <NavLinkTouchable>
+              <Icon name="explore" color="#888" size={24} />
+              <LinkText>Explorar</LinkText>
+            </NavLinkTouchable>
+          </NavLink>
           <NavLink>
             <NavLinkTouchable>
               <Icon name="add-location" color="#888" size={24} />
@@ -50,11 +56,12 @@ export default function MenuDrawer() {
           </NavLink>
         </Links>
       </Scroller>
-      <LegalInfo>
-        <TouchableOpacity>
-          <LegalText>Informações Legais</LegalText>
-        </TouchableOpacity>
-      </LegalInfo>
+      <AboutInfo>
+        <AboutTouchable>
+          <Icon name="info" color="#888" size={16} />
+          <AboutText>Informações</AboutText>
+        </AboutTouchable>
+      </AboutInfo>
     </Container>
   );
 }
