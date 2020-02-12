@@ -59,9 +59,6 @@ export default function List() {
             <th width="18%" align="center">
               DESCRIÇÃO
             </th>
-            <th width="18%" align="center">
-              HISTÓRIA
-            </th>
             <th width="5%" /> {/*eslint-disable-line */}
           </tr>
         </thead>
@@ -72,13 +69,6 @@ export default function List() {
               <td>Natureza</td>
               <td align="center">
                 {attraction.description ? (
-                  <MdCheck size={24} />
-                ) : (
-                  <MdClear size={24} />
-                )}
-              </td>
-              <td align="center">
-                {attraction.history ? (
                   <MdCheck size={24} />
                 ) : (
                   <MdClear size={24} />

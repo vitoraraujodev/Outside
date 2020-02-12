@@ -4,7 +4,6 @@ const PointSchema = require('./util/PointSchema');
 const AttractionSchema = new mongoose.Schema({
   title: String,
   description: String,
-  history: String,
   picture_id: Number,
   kind: String,
   location: {

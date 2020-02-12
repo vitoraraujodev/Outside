@@ -53,7 +53,6 @@ class AttractionController {
     const schema = Yup.object().shape({
       title: Yup.string().required(),
       description: Yup.string(),
-      history: Yup.string(),
       kind: Yup.string().required(),
       longitude: Yup.number().required(),
       latitude: Yup.number().required(),
@@ -70,7 +69,7 @@ class AttractionController {
     }
 
     const {
-      title, description, history, kind, latitude, longitude,
+      title, description, kind, latitude, longitude,
     } = req.body;
 
     const location = {
@@ -79,7 +78,7 @@ class AttractionController {
     };
 
     const attraction = await Attraction.create({
-      title, description, history, kind, location,
+      title, description, kind, location,
     });
 
     return res.json(attraction);
@@ -89,7 +88,6 @@ class AttractionController {
     const schema = Yup.object().shape({
       title: Yup.string(),
       description: Yup.string(),
-      history: Yup.string(),
       kind: Yup.string(),
       longitude: Yup.number(),
       latitude: Yup.number(),
@@ -106,7 +104,7 @@ class AttractionController {
     }
 
     const {
-      title, description, history, kind, latitude, longitude,
+      title, description, kind, latitude, longitude,
     } = req.body;
 
     const location = {
@@ -115,7 +113,7 @@ class AttractionController {
     };
 
     const attraction = await Attraction.findByIdAndUpdate(req.params.id, {
-      title, description, history, kind, location,
+      title, description, kind, location,
     }, { new: true });
 
     return res.json(

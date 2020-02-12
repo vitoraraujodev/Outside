@@ -52,9 +52,6 @@ export default function Store({ location }) { //eslint-disable-line
         <strong>DESCRIÇÃO</strong>
         <Input name="description" placeholder="Descrição breve" />
 
-        <strong>HISTÓRIA</strong>
-        <Input name="history" placeholder="História breve" />
-
         <section>
           <article>
             <strong>LATITUDE</strong>
