@@ -1,15 +1,17 @@
 import * as Yup from 'yup';
+
 import Attraction from '../schemas/Attractions';
 import Admin from '../models/Admin';
 
 class AttractionController {
   async index(req, res) {
     const {
-      topLatitude, bottomLatitude, leftLongitude, rightLongitude,
+      topLatitude, bottomLatitude, leftLongitude, rightLongitude, kind,
     } = req.query;
 
     if (topLatitude && bottomLatitude && leftLongitude && rightLongitude) {
       const attractions = await Attraction.find({
+        $or: [{ kind }, { kind: 'b' }],
         location: {
           $geoWithin: {
             $geometry: {

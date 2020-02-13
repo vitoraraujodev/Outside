@@ -24,7 +24,7 @@ export const KindContainer = styled.View`
 `;
 
 export const KindButtom = styled.TouchableOpacity`
-  background: #fff;
+  background: ${props => (props.selected ? '#ddd' : '#fff')};
   border: 2px solid #ddd;
   border-radius: 30px;
   justify-content: center;

@@ -10,8 +10,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MenuButton from '~/components/MenuButton';
 import Footer from '~/components/Footer';
 
+import api from '~/services/api';
+
 export default function Map({ navigation }) {
   const [currentRegion, setCurrentRegion] = useState(null);
+  const [attractions, setAttractions] = useState([]);
+  const [currentKind, setCurrentKind] = useState('n');
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -40,6 +44,49 @@ export default function Map({ navigation }) {
     return null;
   }
 
+  async function handleRegionChanged(region) {
+    const topLatitude = region.latitude + region.latitudeDelta / 2;
+    const bottomLatitude = region.latitude - region.latitudeDelta / 2;
+    const leftLongitude = region.longitude + region.longitudeDelta / 2;
+    const rightLongitude = region.longitude - region.longitudeDelta / 2;
+
+    const response = await api.get('/attractions', {
+      params: {
+        topLatitude,
+        bottomLatitude,
+        leftLongitude,
+        rightLongitude,
+        kind: currentKind,
+      },
+    });
+    setCurrentRegion(region);
+    setAttractions(response.data);
+  }
+
+  async function handleKindChange(kind) {
+    const topLatitude =
+      currentRegion.latitude + currentRegion.latitudeDelta / 2;
+    const bottomLatitude =
+      currentRegion.latitude - currentRegion.latitudeDelta / 2;
+    const leftLongitude =
+      currentRegion.longitude + currentRegion.longitudeDelta / 2;
+    const rightLongitude =
+      currentRegion.longitude - currentRegion.longitudeDelta / 2;
+
+    const response = await api.get('/attractions', {
+      params: {
+        topLatitude,
+        bottomLatitude,
+        leftLongitude,
+        rightLongitude,
+        kind,
+      },
+    });
+
+    setAttractions(response.data);
+    setCurrentKind(kind);
+  }
+
   return (
     <>
       <MapView
@@ -51,24 +98,32 @@ export default function Map({ navigation }) {
         showsMyLocationButton={false}
         provider={MapView.PROVIDER_GOOGLE}
         customMapStyle={googleMapStyle}
+        onRegionChangeComplete={handleRegionChanged}
       >
-        <Marker coordinate={{ latitude: -22.9906595, longitude: -43.1953568 }}>
-          <Icon name="location-on" size={50} color="#bb3333" />
-          <Callout
-            onPress={() => {
-              // navegação
+        {attractions.map(attraction => (
+          <Marker
+            key={attraction._id}
+            coordinate={{
+              latitude: attraction.location.coordinates[1],
+              longitude: attraction.location.coordinates[0],
             }}
           >
-            <View>
-              <Text>Vitor Araujo</Text>
-              <Text>CTO do maior App do mundo</Text>
-              <Text>ReactJS, React Native, Node.js</Text>
-            </View>
-          </Callout>
-        </Marker>
+            <Icon name="location-on" size={50} color="#bb3333" />
+            <Callout
+              onPress={() => {
+                // navegação
+              }}
+            >
+              <View>
+                <Text>Vitor Araujo</Text>
+                <Text>ReactJS, React Native, Node.js</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
       </MapView>
       <MenuButton navigation={navigation} />
-      <Footer />
+      <Footer currentKind={currentKind} onKindChange={handleKindChange} />
     </>
   );
 }
