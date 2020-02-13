@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Callout } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   requestPermissionsAsync,
   getCurrentPositionAsync,
 } from 'expo-location';
-import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MenuButton from '~/components/MenuButton';
 import Footer from '~/components/Footer';
+import Callout from '~/components/Callout';
 
 import api from '~/services/api';
 
@@ -16,6 +16,7 @@ export default function Map({ navigation }) {
   const [currentRegion, setCurrentRegion] = useState(null);
   const [attractions, setAttractions] = useState([]);
   const [currentKind, setCurrentKind] = useState('n');
+  let mapView = null;
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -60,6 +61,7 @@ export default function Map({ navigation }) {
       },
     });
     setCurrentRegion(region);
+    console.tron.log(region);
     setAttractions(response.data);
   }
 
@@ -91,10 +93,12 @@ export default function Map({ navigation }) {
     <>
       <MapView
         initialRegion={currentRegion}
+        ref={map => (mapView = map)} //eslint-disable-line
         showsUserLocation
         pitchEnabled={false}
         style={{ flex: 1 }}
         showsCompass={false}
+        moveOnMarkerPress={false}
         showsMyLocationButton={false}
         provider={MapView.PROVIDER_GOOGLE}
         customMapStyle={googleMapStyle}
@@ -107,18 +111,20 @@ export default function Map({ navigation }) {
               latitude: attraction.location.coordinates[1],
               longitude: attraction.location.coordinates[0],
             }}
+            onPress={() =>
+              mapView.animateToRegion(
+                {
+                  longitudeDelta: 0.04,
+                  latitudeDelta: 0.07,
+                  longitude: attraction.location.coordinates[0],
+                  latitude: attraction.location.coordinates[1] + 0.02,
+                },
+                400
+              )
+            }
           >
             <Icon name="location-on" size={50} color="#bb3333" />
-            <Callout
-              onPress={() => {
-                // navegação
-              }}
-            >
-              <View>
-                <Text>Vitor Araujo</Text>
-                <Text>ReactJS, React Native, Node.js</Text>
-              </View>
-            </Callout>
+            <Callout attraction={attraction} />
           </Marker>
         ))}
       </MapView>
