@@ -15,7 +15,7 @@ import {
   AboutText,
 } from './styles';
 
-export default function MenuDrawer() {
+export default function MenuDrawer({ navigation }) {
   return (
     <Container>
       <Profile>
@@ -25,7 +25,11 @@ export default function MenuDrawer() {
       <Scroller>
         <Links>
           <NavLink>
-            <NavLinkTouchable>
+            <NavLinkTouchable
+              onPress={() => {
+                navigation.navigate('Map');
+              }}
+            >
               <Icon name="explore" color="#888" size={24} />
               <LinkText>Explorar</LinkText>
             </NavLinkTouchable>
@@ -43,7 +47,11 @@ export default function MenuDrawer() {
             </NavLinkTouchable>
           </NavLink>
           <NavLink>
-            <NavLinkTouchable>
+            <NavLinkTouchable
+              onPress={() => {
+                navigation.navigate('Profile');
+              }}
+            >
               <Icon name="person" color="#888" size={24} />
               <LinkText>Perfil</LinkText>
             </NavLinkTouchable>

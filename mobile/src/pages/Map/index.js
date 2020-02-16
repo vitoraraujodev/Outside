@@ -63,7 +63,6 @@ export default function Map({ navigation }) {
       },
     });
     setCurrentRegion(region);
-    console.tron.log(region);
     setAttractions(response.data);
   }
 

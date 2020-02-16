@@ -7,6 +7,7 @@ import { Dimensions } from 'react-native';
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Map from '~/pages/Map';
+import Profile from '~/pages/Profile';
 
 import MenuDrawer from '~/components/MenuDrawer';
 
@@ -24,7 +25,7 @@ export default (isSigned = false) =>
     createSwitchNavigator(
       {
         Sign: createSwitchNavigator({ SignIn, SignUp }),
-        App: createDrawerNavigator({ Map }, DrawerConfig),
+        App: createDrawerNavigator({ Map, Profile }, DrawerConfig),
       },
       {
         initialRouteName: isSigned ? 'App' : 'Sign',
