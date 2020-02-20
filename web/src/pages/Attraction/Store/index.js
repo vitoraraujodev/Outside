@@ -4,6 +4,8 @@ import { Input } from '@rocketseat/unform';
 
 import { Container, CadastrationForm, TypeSelect } from './styles';
 
+import PictureInput from '~/components/PictureInput';
+
 import history from '~/services/history';
 import api from '~/services/api';
 
@@ -44,6 +46,9 @@ export default function Store() {
             <button type="submit">SALVAR</button>
           </aside>
         </div>
+
+        <PictureInput name="picture_id" />
+
         <strong>TÍTULO</strong>
         <Input name="title" placeholder="Nome do lugar" />
 

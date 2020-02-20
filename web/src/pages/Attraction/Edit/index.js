@@ -7,6 +7,8 @@ import { Container, CadastrationForm, TypeSelect } from './styles';
 import history from '~/services/history';
 import api from '~/services/api';
 
+import PictureInput from '~/components/PictureInput';
+
 export default function Store({ location }) { //eslint-disable-line
   const { attraction } = location.state; //eslint-disable-line
 
@@ -46,6 +48,9 @@ export default function Store({ location }) { //eslint-disable-line
             <button type="submit">SALVAR</button>
           </aside>
         </div>
+
+        <PictureInput name="avatar_id" />
+
         <strong>TÍTULO</strong>
         <Input name="title" placeholder="Nome do lugar" />
 
