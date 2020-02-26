@@ -9,8 +9,6 @@ export default function Footer({ currentKind, onKindChange }) {
   const historySelected = currentKind === 'h';
   const restaurantSelected = currentKind === 'r';
 
-  console.tron.log(currentKind);
-
   return (
     <Container>
       <KindContainer>

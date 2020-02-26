@@ -8,7 +8,6 @@ import {
 
 import MenuButton from '~/components/MenuButton';
 import Footer from '~/components/Footer';
-import Callout from '~/components/Callout';
 
 import { googleMapStyle } from '~/util/googleMapStyle';
 
@@ -102,6 +101,11 @@ export default function Map({ navigation }) {
     );
   }
 
+  async function loadPicture(attraction) {
+    const response = await api.get(`/picture/${attraction.picture_id}`);
+    setPictureUrl(response.data.url);
+  }
+
   return (
     <>
       <MapView
@@ -124,15 +128,15 @@ export default function Map({ navigation }) {
               latitude: attraction.location.coordinates[1],
               longitude: attraction.location.coordinates[0],
             }}
-            onPress={() =>
+            onPress={() => {
               animateToMarker(
                 attraction.location.coordinates[1],
                 attraction.location.coordinates[0]
-              )
-            }
+              );
+              loadPicture(attraction);
+            }}
           >
             <Icon name="location-on" size={50} color="#bb3333" />
-            <Callout attraction={attraction} />
           </Marker>
         ))}
       </MapView>

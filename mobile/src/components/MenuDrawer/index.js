@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { useSelector } from 'react-redux';
+
 import {
   Container,
   Scroller,
@@ -16,11 +18,13 @@ import {
 } from './styles';
 
 export default function MenuDrawer({ navigation }) {
+  const profile = useSelector(state => state.user.profile);
+
   return (
     <Container>
       <Profile>
         <Icon name="person" color="#fff" size={40} />
-        <Name>Vitor Araujo</Name>
+        <Name>{profile.name}</Name>
       </Profile>
       <Scroller>
         <Links>
