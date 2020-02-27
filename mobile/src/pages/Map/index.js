@@ -8,6 +8,7 @@ import {
 
 import MenuButton from '~/components/MenuButton';
 import Footer from '~/components/Footer';
+import Modal from '~/components/Modal';
 
 import { googleMapStyle } from '~/util/googleMapStyle';
 
@@ -17,6 +18,9 @@ export default function Map({ navigation }) {
   const [currentRegion, setCurrentRegion] = useState(null);
   const [attractions, setAttractions] = useState([]);
   const [currentKind, setCurrentKind] = useState('n');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedAttraction, setSelectedAttraction] = useState({});
+
   let mapView = null;
 
   useEffect(() => {
@@ -95,19 +99,20 @@ export default function Map({ navigation }) {
         longitudeDelta: 0.04,
         latitudeDelta: 0.07,
         longitude,
-        latitude: latitude + 0.02,
+        latitude,
       },
       400
     );
   }
 
-  async function loadPicture(attraction) {
-    const response = await api.get(`/picture/${attraction.picture_id}`);
-    setPictureUrl(response.data.url);
-  }
-
   return (
     <>
+      <Modal
+        isVisible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        attraction={selectedAttraction}
+      />
+
       <MapView
         initialRegion={currentRegion}
         ref={map => (mapView = map)} //eslint-disable-line
@@ -129,11 +134,8 @@ export default function Map({ navigation }) {
               longitude: attraction.location.coordinates[0],
             }}
             onPress={() => {
-              animateToMarker(
-                attraction.location.coordinates[1],
-                attraction.location.coordinates[0]
-              );
-              loadPicture(attraction);
+              setSelectedAttraction(attraction);
+              setModalVisible(true);
             }}
           >
             <Icon name="location-on" size={50} color="#bb3333" />
