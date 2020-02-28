@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
-  flex: 1;
-  background: #bb3333;
+export const Container = styled.View`
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const Text = styled.Text`
-  font-size: 20px;
+export const Title = styled.Text`
+  font-size: 12px;
+  font-weight: bold;
   align-self: center;
   justify-content: center;
-  color: #000;
+  color: #711;
 `;

@@ -12,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  background: #bb2222;
+  background: #bb3333;
 
   align-items: center;
   flex-direction: row;
@@ -32,7 +32,7 @@ export const Header = styled.View`
 
 export const Title = styled.Text`
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   color: #fff;
 `;
 

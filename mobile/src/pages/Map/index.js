@@ -10,6 +10,8 @@ import MenuButton from '~/components/MenuButton';
 import Footer from '~/components/Footer';
 import Modal from '~/components/Modal';
 
+import { Container, Title } from './styles';
+
 import { googleMapStyle } from '~/util/googleMapStyle';
 
 import api from '~/services/api';
@@ -138,7 +140,10 @@ export default function Map({ navigation }) {
               setModalVisible(true);
             }}
           >
-            <Icon name="location-on" size={50} color="#bb3333" />
+            <Container>
+              <Title>{attraction.title}</Title>
+              <Icon name="location-on" size={50} color="#bb3333" />
+            </Container>
           </Marker>
         ))}
       </MapView>
