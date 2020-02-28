@@ -5,10 +5,12 @@ export const AttractionModal = styled.Modal`
 `;
 
 export const Container = styled.View`
-  top: 30px;
+  margin: auto 0;
   align-self: center;
   width: 85%;
-  height: 70%;
+  max-width: 480px;
+  height: 60%;
+  bottom: 30px;
 `;
 
 export const Header = styled.View`
@@ -40,9 +42,17 @@ export const Close = styled.TouchableOpacity``;
 
 export const Content = styled.View`
   background: #eee;
-  padding: 12px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
+`;
+
+export const Picture = styled.Image`
+  width: 100%;
+`;
+
+export const Description = styled.Text`
+  padding: 18px;
+  color: #444;
 `;
 
 export const Background = styled.TouchableWithoutFeedback``;

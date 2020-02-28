@@ -8,10 +8,14 @@ import {
   Close,
   Content,
   Scroll,
+  Picture,
+  Description,
   Background,
   BackgroundSpace,
   Block,
 } from './styles';
+
+import photo from '~/assets/300x250.png';
 
 export default function Modal({ isVisible, onClose, attraction }) {
   return (
@@ -33,9 +37,12 @@ export default function Modal({ isVisible, onClose, attraction }) {
               </Header>
               <Content>
                 <Scroll>
-                  <Block />
-                  <Block />
-                  <Block />
+                  <Picture resize="cover" source={photo} />
+                  <Description>
+                    {attraction.description
+                      ? attraction.description
+                      : 'Ainda não há uma descrição.. Indique uma!'}
+                  </Description>
                 </Scroll>
               </Content>
             </Container>
