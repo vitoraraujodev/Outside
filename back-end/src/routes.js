@@ -26,6 +26,7 @@ routes.delete('/attractions/:id', authMiddleware, AttractionController.delete);
 routes.post('/users', UserController.store);
 routes.put('/users', authMiddleware, UserController.update);
 
+routes.get('/picture/:id', FileController.show);
 routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;

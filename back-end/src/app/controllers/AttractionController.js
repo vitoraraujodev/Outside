@@ -119,7 +119,7 @@ class AttractionController {
 
     const attraction = await Attraction.findOne({ _id: req.params.id });
 
-    if (picture_id !== attraction.picture_id) {
+    if (picture_id && (picture_id !== attraction.picture_id)) {
       const file = await File.findByPk(attraction.picture_id);
       await file.destroy();
     }
