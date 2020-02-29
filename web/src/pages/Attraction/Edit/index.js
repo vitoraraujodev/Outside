@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Input } from '@rocketseat/unform';
 
@@ -11,6 +11,15 @@ import PictureInput from '~/components/PictureInput';
 
 export default function Store({ location }) { //eslint-disable-line
   const { attraction } = location.state; //eslint-disable-line
+  const [picture, setPicture] = useState('');
+
+  useEffect(() => {
+    async function loadPicture() {
+      const response = await api.get(`/picture/${attraction.picture_id}`);
+      setPicture(response.data.url);
+    }
+    loadPicture();
+  });
 
   function handleBack(route) {
     history.push(route);
@@ -49,7 +58,7 @@ export default function Store({ location }) { //eslint-disable-line
           </aside>
         </div>
 
-        <PictureInput name="avatar_id" />
+        <PictureInput pictureUrl={picture} name="avatar_id" />
 
         <strong>TÍTULO</strong>
         <Input name="title" placeholder="Nome do lugar" />

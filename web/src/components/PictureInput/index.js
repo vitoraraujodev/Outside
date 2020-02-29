@@ -6,10 +6,10 @@ import { Container } from './styles';
 
 import addButton from '~/assets/addButton.png';
 
-export default function AvatarInput() {
+export default function AvatarInput({ pictureUrl }) {
   const { defaultValue, registerField } = useField('picture_id');
   const [file, setFile] = useState(defaultValue);
-  const [preview, setPreview] = useState(defaultValue && defaultValue.url);
+  const [preview, setPreview] = useState(pictureUrl || '');
 
   const ref = useRef();
 
@@ -39,7 +39,7 @@ export default function AvatarInput() {
   return (
     <Container>
       <label htmlFor="avatar">
-        <img src={preview || addButton} alt="" />
+        <img src={preview || pictureUrl || addButton} alt="" />
         <input
           type="file"
           id="avatar"
