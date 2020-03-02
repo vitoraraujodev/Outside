@@ -5,6 +5,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import AttractionController from './app/controllers/AttractionController';
 import FileController from './app/controllers/FileController';
+import RequestController from './app/controllers/RequestController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -28,5 +29,8 @@ routes.put('/users', authMiddleware, UserController.update);
 
 routes.get('/picture/:id', FileController.show);
 routes.post('/files', upload.single('file'), FileController.store);
+
+routes.get('/requests', authMiddleware, RequestController.index);
+routes.post('/requests', authMiddleware, RequestController.store);
 
 export default routes;
