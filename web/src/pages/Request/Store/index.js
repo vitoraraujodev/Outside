@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { toast } from 'react-toastify';
 
 import { Input } from '@rocketseat/unform';
 
@@ -9,25 +10,24 @@ import api from '~/services/api';
 
 import PictureInput from '~/components/PictureInput';
 
-export default function Edit({ location }) { //eslint-disable-line
-  const { attraction } = location.state; //eslint-disable-line
-  const [picture, setPicture] = useState('');
-
-  useEffect(() => {
-    async function loadPicture() {
-      const response = await api.get(`/picture/${attraction.picture_id}`);
-      setPicture(response.data.url);
-    }
-    loadPicture();
-  });
+export default function Store({ location }) { //eslint-disable-line
+  const { request } = location.state; //eslint-disable-line
 
   function handleBack(route) {
     history.push(route);
   }
 
+  async function handleDelete(id) {
+    await api.delete(`/requests/${id}`);
+  }
+
   async function handleSubmit(data) {
-    await api.put(`/attractions/${attraction._id}`, data); //eslint-disable-line
-    history.push('/attractions');
+    try {
+      await api.post(`/attractions`, data);
+      history.push('/requests');
+    } catch (e) {
+      toast.error('Erro no cadastro');
+    }
   }
 
   const selectOptions = [
@@ -47,18 +47,21 @@ export default function Edit({ location }) { //eslint-disable-line
 
   return (
     <Container>
-      <CadastrationForm initialData={attraction} onSubmit={handleSubmit}>
+      <CadastrationForm initialData={request} onSubmit={handleSubmit}>
         <div>
-          <strong>Edição de atração</strong>
+          <strong>Analise de Pedido</strong>
           <aside>
-            <button type="button" onClick={() => handleBack('/attractions')}>
+            <button type="button" onClick={() => handleBack('/requests')}>
               VOLTAR
+            </button>
+            <button type="submit" onClick={() => handleDelete(request.id)}>
+              DESCARTAR
             </button>
             <button type="submit">SALVAR</button>
           </aside>
         </div>
 
-        <PictureInput pictureUrl={picture} name="picture_id" />
+        <PictureInput name="picture_id" />
 
         <strong>TÍTULO</strong>
         <Input name="title" placeholder="Nome do lugar" />

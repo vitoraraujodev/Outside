@@ -43,7 +43,6 @@ export default function List() {
           >
             CADASTRAR
           </button>
-          <input placeholder="Buscar atração" />
         </aside>
       </div>
 
@@ -66,7 +65,11 @@ export default function List() {
           {attractions.map(attraction => (
             <tr>
               <td>{attraction.title}</td>
-              <td>Natureza</td>
+              <td>
+                {attraction.kind === 'n' ? 'Natureza' : null}
+                {attraction.kind === 'h' ? 'Histórico' : null}
+                {attraction.kind === 'b' ? 'Ambos' : null}
+              </td>
               <td align="center">
                 {attraction.description ? (
                   <MdCheck size={24} />

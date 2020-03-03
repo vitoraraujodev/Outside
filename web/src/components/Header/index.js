@@ -21,8 +21,11 @@ export default function Header() {
             <strong>OUTSIDE</strong>
           </Logo>
           <nav>
-            <NavLink activeStyle={{ color: '#f2d984' }} to="/attractions">
+            <NavLink activeStyle={{ color: '#fff' }} to="/attractions">
               Atrações
+            </NavLink>
+            <NavLink activeStyle={{ color: '#fff' }} to="/requests">
+              Pedidos
             </NavLink>
           </nav>
         </div>

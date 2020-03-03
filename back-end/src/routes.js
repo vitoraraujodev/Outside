@@ -32,5 +32,6 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/requests', authMiddleware, RequestController.index);
 routes.post('/requests', authMiddleware, RequestController.store);
+routes.delete('/requests/:id', authMiddleware, RequestController.delete);
 
 export default routes;

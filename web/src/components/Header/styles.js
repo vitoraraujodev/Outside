@@ -17,6 +17,7 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     a {
+      color: #ddd;
       font-size: 16px;
       font-weight: bold;
       margin-right: 24px;
@@ -28,14 +29,16 @@ export const Content = styled.div`
     flex-direction: column;
     text-align: right;
     strong {
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 2px;
       color: #fff;
     }
-    span {
+    button {
+      border: none;
+      background: #bb3333;
       margin-top: 2px;
-      font-size: 12px;
-      color: #f2d984;
+      font-size: 13px;
+      color: #ddd;
       cursor: pointer;
     }
   }

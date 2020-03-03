@@ -33,7 +33,7 @@ class RequestsController {
       title, description, kind, latitude, longitude,
     } = req.body;
 
-    const user_id = req.userId;
+    const user_id = req.userId; //eslint-disable-line
 
     const request = await Request.create({
       title, description, kind, latitude, longitude, user_id,
@@ -49,11 +49,12 @@ class RequestsController {
       return res.status(401).json({ error: 'Only administrators can delete a request.' });
     }
 
-    await Request.findByIdAndDelete(req.params.id);
+    await Request.destroy({ where: { id: req.params.id } });
 
 
     return res.json({ okay: true });
   }
 }
+
 
 export default new RequestsController();
