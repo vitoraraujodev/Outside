@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Image, Dimensions, StatusBar } from 'react-native';
+
+import api from '~/services/api';
+
 import {
   AttractionModal,
   Container,
@@ -8,16 +12,45 @@ import {
   Close,
   Content,
   Scroll,
-  Picture,
+  Loading,
   Description,
   Background,
   BackgroundSpace,
-  Block,
 } from './styles';
 
-import photo from '~/assets/300x250.png';
+const WIDTH = Dimensions.get('window').width;
 
 export default function Modal({ isVisible, onClose, attraction }) {
+  const [picture, setPicture] = useState('');
+  const [picReady, setPicReady] = useState(false);
+  const [pictureWidth, setWidth] = useState();
+  const [pictureHeight, setHeight] = useState();
+
+  useEffect(() => {
+    async function loadPicture() {
+      const response = await api.get(`/picture/${attraction.picture_id}`);
+      setPicture(response.data.url);
+    }
+
+    if (isVisible) {
+      loadPicture();
+    } else {
+      setPicture('');
+      setPicReady(false);
+    }
+  }, [isVisible]); //eslint-disable-line
+
+  useEffect(() => {
+    if (picture) {
+      Image.getSize(picture, (width, height) => {
+        const aspectRatio = width / (WIDTH * 0.85);
+        setHeight(height / aspectRatio);
+        setWidth(WIDTH * 0.85);
+        setPicReady(true);
+      });
+    }
+  }, [picture]);
+
   return (
     <AttractionModal
       onRequestClose={onClose}
@@ -37,7 +70,14 @@ export default function Modal({ isVisible, onClose, attraction }) {
               </Header>
               <Content>
                 <Scroll>
-                  <Picture resize="cover" source={photo} />
+                  {picReady ? (
+                    <Image
+                      source={{ uri: picture }}
+                      style={{ width: pictureWidth, height: pictureHeight }}
+                    />
+                  ) : (
+                    <Loading size={30} color="#fff" />
+                  )}
                   <Description>
                     {attraction.description
                       ? attraction.description

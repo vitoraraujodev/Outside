@@ -7,7 +7,7 @@ import { Container, KindContainer, KindButtom, KindText } from './styles';
 export default function Footer({ currentKind, onKindChange }) {
   const natureSelected = currentKind === 'n';
   const historySelected = currentKind === 'h';
-  const restaurantSelected = currentKind === 'r';
+  // const restaurantSelected = currentKind === 'r';
 
   return (
     <Container>
@@ -26,7 +26,11 @@ export default function Footer({ currentKind, onKindChange }) {
         </KindButtom>
         <KindText>Histórias</KindText>
       </KindContainer>
-      <KindContainer>
+    </Container>
+  );
+}
+
+/** <KindContainer>
         <KindButtom
           selected={restaurantSelected}
           onPress={() => onKindChange('r')}
@@ -34,7 +38,4 @@ export default function Footer({ currentKind, onKindChange }) {
           <Icon name="restaurant" size={28} color="#666" />
         </KindButtom>
         <KindText>Restaurantes</KindText>
-      </KindContainer>
-    </Container>
-  );
-}
+      </KindContainer> */

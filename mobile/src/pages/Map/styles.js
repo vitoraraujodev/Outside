@@ -10,5 +10,5 @@ export const Title = styled.Text`
   font-weight: bold;
   align-self: center;
   justify-content: center;
-  color: #711;
+  color: #622;
 `;

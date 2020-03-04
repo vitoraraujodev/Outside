@@ -7,9 +7,9 @@ export const AttractionModal = styled.Modal`
 export const Container = styled.View`
   margin: auto 0;
   align-self: center;
-  width: 85%;
-  max-width: 480px;
+  max-width: 450px;
   height: 60%;
+  width: 85%;
   bottom: 30px;
 `;
 
@@ -46,8 +46,14 @@ export const Content = styled.View`
   border-bottom-left-radius: 4px;
 `;
 
-export const Picture = styled.Image`
+export const Loading = styled.ActivityIndicator`
   width: 100%;
+  height: 150px;
+  background: #ccc;
+`;
+
+export const Picture = styled.Image`
+  position: relative;
 `;
 
 export const Description = styled.Text`
@@ -61,11 +67,6 @@ export const BackgroundSpace = styled.View`
   flex: 1;
 `;
 
-export const Block = styled.View`
-  background: #999;
-  height: 150px;
-  width: 150px;
-  margin: 4px;
-`;
-
-export const Scroll = styled.ScrollView``;
+export const Scroll = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})``;

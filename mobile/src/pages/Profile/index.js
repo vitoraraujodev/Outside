@@ -54,7 +54,6 @@ export default function Profile({ navigation }) {
 
   return (
     <Background>
-      <StatusBar hidden={false} translucent barStyle="light-content" />
       <MenuButton navigation={navigation} color="#fff" />
       <Container>
         <Title>Meu perfil</Title>
